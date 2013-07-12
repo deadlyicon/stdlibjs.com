@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %title STDLIB.js
+    = stylesheet_tag("application")
+    %link{:href => "/jasmine.css", :rel => "stylesheet", :type => "text/css"}/
+
+    = javascript_tag("application")
+    %script{:src => build_script_path,  :type => "text/javascript"}
+    %script{:src => specs_script_path,  :type => "text/javascript"}
+  %body.container
+
+    %a{:href => "https://github.com/deadlyicon/stdlibjs"}
+      %img{:alt => "Fork me on GitHub", :src => "https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png", :style => "position: absolute; top: 0; right: 0; border: 0;"}/
+
+    %h1
+      STDLIB.js
+      %small version: #{Stdlibjs::VERSION} BETA
+
+    %form{:method => "get"}
+      %input{:type => "submit", style: "visibility: hidden; position: absolute"}
+
+      %p.libraries-list
+        - libraries.to_a.sort.each do |library|
+          - checked = selected_libraries.include? library
+          %label.library
+            %input{type:"checkbox", name: library, value:"", checked: checked}
+            - if resolved_libraries.include? library
+              %strong= library
+            - else
+              = library
+      .row.text-center
+        %p
+          %a.check-all{href:""} check all
+          \|
+          %a.uncheck-all{href:""} uncheck all
+        %p
+          %button.hidden.btn.btn-large.btn-primary.build Build
+          %button.hidden.btn.btn-large.btn-primary.rebuild Rebuild
+          %a.hidden.btn.btn-large.btn-primary.download{href:build_script_path} Download

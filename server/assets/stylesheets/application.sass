@@ -1,0 +1,30 @@
+@import compass/css3
+@import compass/reset
+@import compass/reset
+@import bootstrap
+@import bootstrap-responsive
+@import layout
+
+
+body.container
+  padding: 0 1em
+
+form
+  display: block
+
+.libraries-list
+  margin: 1em 0
+  +column-count(1)
+  @media (min-width: 479px) and (max-width: 768px)
+    +column-count(2)
+  @media (min-width: 769px) and (max-width: 979px)
+    +column-count(3)
+  @media (min-width: 980px)
+    +column-count(4)
+  .library
+    display: block
+    white-space: nowrap
+    text-overflow: ellipsis
+    input
+      position: relative
+      top: -3px

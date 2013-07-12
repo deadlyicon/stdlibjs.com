@@ -1,0 +1,65 @@
+<a href="/build.js?<%= @query_string %>">download uncompressed</a>
+<a href="/build.js?<%= @query_string %>">download compressed</a>
+
+<div>
+  <h2>Selected Options</h2>
+  <%= @selected_build_options.join('<br/>') %>
+</div>
+<div>
+  <h2>Resolved Options</h2>
+  <%= @resolved_build_options.join('<br/>') %>
+</div>
+<div>
+  <h2>specs_for_resolved_build_options</h2>
+  <%= specs_for_resolved_build_options.join('<br/>') %>
+</div>
+<div>
+  <h2>Query String</h2>
+  <%= @query_string %>
+</div>
+
+
+
+<link rel="stylesheet" type="text/css" href="/jasmine.css">
+<script type="text/javascript" src="/jasmine.js"></script>
+<script type="text/javascript">
+  context = describe;
+  function assert(outcome, message) {
+    expect(outcome).toBe(true)
+  };
+</script>
+<script type="text/javascript" src="/jasmine-html.js"></script>
+
+<script type="text/javascript" src="/build.js?<%= @query_string %>"></script>
+<script type="text/javascript" src="/tests.js?<%= @query_string %>"></script>
+
+<script type="text/javascript">
+
+  (function() {
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.updateInterval = 1000;
+
+    var htmlReporter = new jasmine.HtmlReporter();
+
+    jasmineEnv.addReporter(htmlReporter);
+
+    jasmineEnv.specFilter = function(spec) {
+      return htmlReporter.specFilter(spec);
+    };
+
+    var currentWindowOnload = window.onload;
+
+    window.onload = function() {
+      if (currentWindowOnload) {
+        currentWindowOnload();
+      }
+      execJasmine();
+    };
+
+    function execJasmine() {
+      jasmineEnv.execute();
+    }
+
+  })();
+
+</script>

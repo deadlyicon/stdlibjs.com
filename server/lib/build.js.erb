@@ -1,0 +1,8 @@
+//= require_self
+<% env = environment.instance_variable_get(:@environment) %>
+/* STDLIB.js
+ *
+ * build link: <%= env.comment %>
+ *
+ */
+<% env.required_assets.each{|asset| require_asset asset } %>
