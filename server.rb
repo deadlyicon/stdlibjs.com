@@ -37,12 +37,12 @@ class Server < Sinatra::Base
 
   get '/build.js' do
     content_type 'application/javascript'
-    compiler.source
+    return compiler.source if compiler
   end
 
   get '/specs.js' do
     content_type 'application/javascript'
-    spec_compiler.source
+    return spec_compiler.source if spec_compiler
   end
 
   helpers do
@@ -62,6 +62,7 @@ class Server < Sinatra::Base
     end
 
     def compiler
+      return if selected_libraries.empty?
       @compiler ||= Stdlibjs::Compiler.new(
         libraries: selected_libraries,
         download_url: to(build_script_path),
@@ -69,6 +70,7 @@ class Server < Sinatra::Base
     end
 
     def spec_compiler
+      return if selected_libraries.empty?
       @compiler ||= Stdlibjs::SpecCompiler.new(libraries: selected_libraries)
     end
 

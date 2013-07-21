@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/deadlyicon/STDLIB.js.git
   revision: b173c2ebad17375197adb9ce9441850358cdf402
+  branch: master
   specs:
     stdlibjs (0.0.1)
       sprockets (~> 2.10)
